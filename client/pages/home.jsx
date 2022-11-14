@@ -33,6 +33,7 @@ export default class Home extends React.Component {
   }
 }
 
+// moodboard render to home
 // function Moodboard(props) {
 
 // }
