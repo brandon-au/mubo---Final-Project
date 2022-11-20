@@ -1,6 +1,4 @@
 import React from 'react';
-import HelloWorld from '../components/hello-world';
-import Header from '../components/header';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -11,22 +9,26 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/products')
+    fetch('/api/moodboards')
       .then(res => res.json())
-      .then(products => this.setState({ products }));
+      .then(moodboards => this.setState({ moodboards }));
   }
 
+  // const moodboardList = moodboard.map(moodboard =>
+  //     <li key={moodboard.moodboardId}>{ url, moodboard.name }</li>
+  //   )
   render() {
     return (
       <>
-        <div>
-          <Header />
-        </div>
         {/* rendered moodboards */}
-        <div>
-          {/* <a
-          href={`#moodboards?moodboardId=${moodboardId}`} /> */}
-          <HelloWorld />
+        <div className="flex flex-col items-center justify-center lg:flex-row gap-4">
+          {
+            this.state.moodboards.map(moodboard => (
+              <div key={moodboard.moodboardId}>
+                <Moodboard name={moodboard.name} url={moodboard.url} moodboardId={moodboard.moodboardId} />
+              </div>
+            ))
+          }
         </div>
       </>
     );
@@ -34,6 +36,17 @@ export default class Home extends React.Component {
 }
 
 // moodboard render to home
-// function Moodboard(props) {
-
-// }
+function Moodboard(props) {
+  const { name, url, moodboardId } = props;
+  return (
+    <a
+      href={`#moodboards?moodboardId =${moodboardId}`}>
+      <div className="card bg-moodboardName rounded-xl w-[360px] h-[225px]">
+        <img className="object-cover w-[360px] h-[195px] rounded-t-xl" src={url} alt={name} />
+        <div className="card-body">
+          <h2 className="card-title pl-3 pt-1">{name}</h2>
+        </div>
+      </div>
+    </a>
+  );
+}

@@ -5,7 +5,11 @@ export default class Moodboards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      moodboard: null
+      moodboard: null // TODO: remove you don't need this because you can't store information about the overview
+      // TODO: should include name, id, url whatever you need here
+      // name: "",
+      // id: 0 or whatever number,
+      // urls: [],
     };
   }
 

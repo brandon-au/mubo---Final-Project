@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/home';
 import { parseRoute } from './lib';
+import Header from './components/header';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,7 +31,15 @@ export default class App extends React.Component {
     return <Home />;
   }
 
+  // test
   render() {
-    return <Home />;
+    return (
+      <>
+        <div className="flex justify-center lg:pl-80">
+          <Header />
+        </div>
+        <Home />
+      </>
+    );
   }
 }
