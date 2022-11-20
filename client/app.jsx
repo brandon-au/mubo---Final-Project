@@ -34,12 +34,10 @@ export default class App extends React.Component {
   // test
   render() {
     return (
-      <>
-        <div className="flex justify-center lg:pl-80">
-          <Header />
-        </div>
+      <div className="flex flex-col items-center gap-8 pt-5">
+        <Header />
         <Home />
-      </>
+      </div>
     );
   }
 }
