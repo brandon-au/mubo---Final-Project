@@ -18,6 +18,8 @@ CREATE TABLE "public"."users" (
 CREATE TABLE "public"."moodboards" (
     "moodboardId" serial NOT NULL,
     "userId" integer NOT NULL,
+    "name" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
     CONSTRAINT "moodboards_pk" PRIMARY KEY ("moodboardId")
 ) WITH (
   OIDS=FALSE

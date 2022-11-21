@@ -2,11 +2,9 @@ import React from 'react';
 
 export default function Header(props) {
   return (
-    <>
-      <a href="#">
-        Test
-      </a>
-      <h1>Test</h1>
-    </>
+    <a className="text-headerColor font-roboto text-6xl"
+    href="#">
+      mubo
+    </a>
   );
 }
