@@ -1,4 +1,5 @@
 require('dotenv/config');
+// const path = require('path');
 const pg = require('pg');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
@@ -15,6 +16,7 @@ const db = new pg.Pool({
 const app = express();
 
 app.use(staticMiddleware);
+app.use(express.json());
 
 app.get('/api/moodboards', (req, res, next) => {
   const sql = `
@@ -30,13 +32,15 @@ app.get('/api/moodboards', (req, res, next) => {
 });
 
 app.post('/api/moodboards', uploadsMiddleware, (req, res, next) => {
-  const url = `/images/${req.file.filename}`;
+  const { moodboardId, userId, name } = req.body;
+  const url = `/images/${req.body.url}`;
+
   const sql = `
-    insert into "images" ("url")
-    values ($1)
+    insert into "moodboards" ("moodboardId", "userId", "name", "url")
+    values ($1, $2, $3, $4)
     returning *
   `;
-  const params = [url];
+  const params = [moodboardId, userId, name, url];
   db.query(sql, params)
     .then(result => {
       const [image] = result.rows;

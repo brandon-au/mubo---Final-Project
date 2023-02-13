@@ -18,25 +18,13 @@ export default class App extends React.Component {
     });
   }
 
-  renderPage() {
-    const { route } = this.state;
-    if (route.path === '') {
-      return <Home />;
-    }
-    // if (route.path === 'products') {
-    //   const productId = route.params.get('productId');
-    //   return <ProductDetails productId={productId} />;
-    // }
-    // return <NotFound />;
-    return <Home />;
-  }
-
-  // test
   render() {
     return (
-      <div className="flex flex-col items-center gap-8 pt-5">
-        <Header />
-        <Home />
+      <div className='flex flex-col items-center'>
+        <div className="flex flex-col items-center xl:items-start gap-8 py-5 px-[10px]">
+          <Header />
+          <Home />
+        </div>
       </div>
     );
   }

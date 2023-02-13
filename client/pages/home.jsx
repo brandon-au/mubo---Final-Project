@@ -1,27 +1,36 @@
 import React from 'react';
+import MoodboardModal from '../components/createMoodboard.jsx';
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      moodboards: []
+      moodboards: [],
+      boardId: 0
     };
+    this.incrementBoardId = this.incrementBoardId.bind(this);
   }
 
   componentDidMount() {
     fetch('/api/moodboards')
       .then(res => res.json())
-      .then(moodboards => this.setState({ moodboards }));
+      .then(moodboard => {
+        this.setState({
+          moodboards: moodboard,
+          boardId: moodboard.length
+        });
+      });
   }
 
-  // const moodboardList = moodboard.map(moodboard =>
-  //     <li key={moodboard.moodboardId}>{ url, moodboard.name }</li>
-  //   )
+  incrementBoardId() {
+    this.setState(boardId => boardId + 1);
+  }
+
   render() {
     return (
       <>
         {/* rendered moodboards */}
-        <div className="flex flex-col items-center justify-center lg:flex-row gap-4">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-4">
           {
             this.state.moodboards.map(moodboard => (
               <div key={moodboard.moodboardId}>
@@ -30,6 +39,8 @@ export default class Home extends React.Component {
             ))
           }
         </div>
+        {/* create moodboard button */}
+        <MoodboardModal boardId={this.state.boardId} updateId={this.incrementBoardId}/>
       </>
     );
   }
@@ -41,10 +52,10 @@ function Moodboard(props) {
   return (
     <a
       href={`#moodboards?moodboardId =${moodboardId}`}>
-      <div className="card bg-moodboardName rounded-xl w-[360px] h-[225px]">
+      <div className="card bg-moodboardName rounded-xl w-[350px] h-[225px]">
         <img className="object-cover w-[360px] h-[195px] rounded-t-xl" src={url} alt={name} />
         <div className="card-body">
-          <h2 className="card-title pl-3 pt-1">{name}</h2>
+          <h2 className="card-title font-lora pl-3 pt-1">{name}</h2>
         </div>
       </div>
     </a>
